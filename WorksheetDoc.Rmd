@@ -1,0 +1,66 @@
+---
+title: "COVID-19 Actual Case Predictions"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(ggformula)
+```
+
+## Read Data
+
+```{r Read Data}
+
+confirmed <- read.csv("time_series_covid19_confirmed_US copy.csv")
+deaths <- read.csv("time_series_covid19_deaths_US copy.csv")
+
+confirmed
+deaths
+
+```
+
+```{r US Deaths by Day}
+
+colSums(deaths[,c(14:84)]) -> deathSub
+
+as.data.frame(deathSub) -> deathSums
+
+deathSums
+
+```
+
+```{r US Confirmed by Day}
+
+colSums(confirmed[,c(13:83)]) -> confirmedSub
+
+as.data.frame(confirmedSub) -> confirmedSums
+
+confirmedSums
+
+```
+
+```{r Combined US}
+
+bind_cols(deathSums, confirmedSums) -> combinedUS
+
+combinedUS$rate <- combinedUS$deathSub / combinedUS$confirmedSub
+
+combinedUS$Date = seq(from = as.Date("2020-01-02"), to = as.Date("2020-04-02"), by = 'day')
+
+combinedUS
+
+#values = seq(from = as.Date("2017-01-01"), to = as.Date("2017-01-03"), by = 'day')
+
+```
+
+```{r Graph}
+
+combinedUS %>% gf_point(deathSub ~ confirmedSub)
+
+```
+
+
+
