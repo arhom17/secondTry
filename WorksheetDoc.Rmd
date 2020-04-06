@@ -30,7 +30,7 @@ deaths
 
 ### ADJUST COLUMN LENGTH ###
 
-colSums(deaths[,c(14:84)]) -> deathSub
+colSums(deaths[,c(14:87)]) -> deathSub
 
 as.data.frame(deathSub) -> deathSums
 
@@ -42,7 +42,7 @@ deathSums
 
 ### ADJUST COLUMN LENGTH ###
 
-colSums(confirmed[,c(13:83)]) -> confirmedSub
+colSums(confirmed[,c(13:86)]) -> confirmedSub
 
 as.data.frame(confirmedSub) -> confirmedSums
 
@@ -62,7 +62,7 @@ combinedUS$Day1 <- (1 / combinedUS$rate) * combinedUS$deathSub
 
 combinedUS$CurrentEstimate <- combinedUS$Day1*(1.2^13) #Ro can be changed
 
-combinedUS$date <- seq(from = as.Date("2020-01-23"), to = as.Date("2020-04-02"), by = 'day')
+combinedUS$date <- seq(from = as.Date("2020-01-23"), to = as.Date("2020-04-05"), by = 'day')
 
 combinedUS
 
@@ -82,7 +82,7 @@ confirmed[795:893,]
 
 ### ADJUST COLUMN LENGTH ###
 
-colSums(deaths[795:893,c(14:84)]) -> deathSubIA
+colSums(deaths[795:893,c(14:87)]) -> deathSubIA
 
 as.data.frame(deathSubIA) -> deathSumsIA
 
@@ -94,7 +94,7 @@ deathSumsIA
 
 ### ADJUST COLUMN LENGTH ###
 
-colSums(confirmed[795:893,c(13:83)]) -> confirmedSubIA
+colSums(confirmed[795:893,c(13:86)]) -> confirmedSubIA
 
 as.data.frame(confirmedSubIA) -> confirmedSumsIA
 
@@ -114,14 +114,17 @@ combinedIA$Day1 <- (1 / combinedIA$rate) * combinedIA$deathSub
 
 combinedIA$CurrentEstimate <- combinedIA$Day1*(1.2^13) #Ro can be changed
 
-combinedIA$date <- seq(from = as.Date("2020-01-23"), to = as.Date("2020-04-02"), by = 'day')
+combinedIA$date <- seq(from = as.Date("2020-01-23"), to = as.Date("2020-04-05"), by = 'day')
 
 combinedIA
 
 ```
 
-```{r Graph IA}
 
-combinedIA %>% gf_line(CurrentEstimate ~ date, color = "ORANGE") %>% gf_line(confirmedSub ~ date, color = "RED")
 
+## End
+
+```{r Save Data}
+save(combinedUS, combinedIA, file = "SavedData.rda")
 ```
+
