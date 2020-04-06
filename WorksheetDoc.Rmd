@@ -48,17 +48,19 @@ bind_cols(deathSums, confirmedSums) -> combinedUS
 
 combinedUS$rate <- combinedUS$deathSub / combinedUS$confirmedSub
 
-combinedUS$Date = seq(from = as.Date("2020-01-02"), to = as.Date("2020-04-02"), by = 'day')
+combinedUS$Day1 <- (1 / combinedUS$rate) * combinedUS$deathSub
+
+combinedUS$CurrentEstimate <- combinedUS$Day1*(1.2^13)
+
+combinedUS$date <- seq(from = as.Date("2020-01-23"), to = as.Date("2020-04-02"), by = 'day')
 
 combinedUS
 
-#values = seq(from = as.Date("2017-01-01"), to = as.Date("2017-01-03"), by = 'day')
-
 ```
 
-```{r Graph}
+```{r Graph US}
 
-combinedUS %>% gf_point(deathSub ~ confirmedSub)
+combinedUS %>% gf_line(CurrentEstimate ~ date, color = "ORANGE") %>% gf_line(confirmedSub ~ date, color = "RED")
 
 ```
 
