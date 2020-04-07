@@ -128,3 +128,8 @@ combinedIA
 save(combinedUS, combinedIA, file = "SavedData.rda")
 ```
 
+```{r Wrtie Data}
+write.table(combinedUS, file = "combinedUS.csv", sep = ",")
+write.table(combinedIA, file = "combinedIA.csv", sep = ",")
+```
+
