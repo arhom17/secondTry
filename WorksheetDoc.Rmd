@@ -1,5 +1,6 @@
 ---
 title: "COVID-19 Actual Case Predictions"
+author: "Alexander Rhomberg"
 output: html_document
 ---
 

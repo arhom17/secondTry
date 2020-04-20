@@ -1,9 +1,9 @@
 ---
 title: "COVID-19 Prediction Visuals"
-author: "Alex Rhomberg"
+author: "Alexander Rhomberg"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -16,7 +16,7 @@ load("SavedData.rda")
 ## USA
 
 ```{r Graph US}
-combinedUS %>% gf_line(CurrentEstimate ~ date, color = "ORANGE", size = 1.5, title = "Confirmed vs Predicted COVID-19 Cases", caption = ("Red - Confirmed       Orange - Predicted")) %>% gf_line(confirmedSub ~ date, color = "RED", size = 1.5) %>% gf_labs(x = "Date", y = "Amount")
+combinedUS %>% gf_line(CurrentEstimate ~ date, color = "ORANGE", size = 1.5, title = "Confirmed vs Predicted COVID-19 Cases", caption = ("Red - Confirmed       Orange - Predicted")) %>% gf_line(confirmedSub ~ date, color = "RED", size = 1.5) %>% gf_labs(x = "Date", y = "Amount") 
 ```
 
 ```{r Table US}
